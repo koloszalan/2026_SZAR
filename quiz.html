@@ -23,8 +23,10 @@
       --success-glow: rgba(16, 185, 129, 0.25);
       --danger: #ef4444;
       --danger-glow: rgba(239, 68, 68, 0.25);
+      --warning: #f59e0b;
       --badge-zh1: #8b5cf6;
       --badge-zh2: #06b6d4;
+      --badge-vizsga: #f59e0b;
       --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -54,7 +56,7 @@
     /* HEADER */
     header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .author-badge {
@@ -98,6 +100,28 @@
       font-size: 0.95rem;
     }
 
+    /* SHORTCUT HINT BAR */
+    .keyboard-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .kbd-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
     /* TOP CONTROLS */
     .control-panel {
       background: var(--card-bg);
@@ -120,14 +144,14 @@
     }
 
     .mode-btn {
-      flex: 1 1 140px;
-      padding: 10px 16px;
+      flex: 1 1 180px;
+      padding: 12px 14px;
       border-radius: 12px;
       border: 1px solid var(--card-border);
       background: rgba(255, 255, 255, 0.03);
       color: var(--text-muted);
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
       text-align: center;
@@ -145,6 +169,58 @@
       box-shadow: 0 0 16px var(--accent-glow);
     }
 
+    /* SEARCH BAR */
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 10px 16px 10px 38px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.9rem;
+    }
+
+    .mode-requirement-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mode-requirement-box strong {
+      color: #38bdf8;
+    }
+
     .action-row {
       display: flex;
       justify-content: space-between;
@@ -152,6 +228,7 @@
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding-top: 12px;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .stats-counter {
@@ -258,6 +335,12 @@
       border: 1px solid rgba(6, 182, 212, 0.3);
     }
 
+    .tag-vizsga {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fde68a;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
     .q-text {
       font-size: 1.03rem;
       line-height: 1.5;
@@ -273,7 +356,7 @@
     }
 
     .opt-btn {
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(255, 255, 255, 0.03);
@@ -286,6 +369,16 @@
       justify-content: center;
       gap: 8px;
       transition: all 0.15s ease;
+    }
+
+    .opt-btn .key-hint {
+      font-size: 0.75rem;
+      font-weight: 600;
+      opacity: 0.6;
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
     .opt-btn:hover:not(:disabled) {
@@ -392,29 +485,36 @@
       font-family: var(--font-mono);
     }
 
-    .grade-5 {
-      background: #065f46;
-      color: #6ee7b7;
+    .grade-5 { background: #065f46; color: #6ee7b7; }
+    .grade-4 { background: #1e3a8a; color: #93c5fd; }
+    .grade-3 { background: #78350f; color: #fde68a; }
+    .grade-2 { background: #831843; color: #fbcfe8; }
+    .grade-1 { background: #7f1d1d; color: #fca5a5; }
+
+    .banner-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
     }
 
-    .grade-4 {
-      background: #1e3a8a;
-      color: #93c5fd;
+    .btn-retry-mistakes {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(239, 68, 68, 0.35);
+      transition: all 0.2s;
     }
 
-    .grade-3 {
-      background: #78350f;
-      color: #fde68a;
-    }
-
-    .grade-2 {
-      background: #831843;
-      color: #fbcfe8;
-    }
-
-    .grade-1 {
-      background: #7f1d1d;
-      color: #fca5a5;
+    .btn-retry-mistakes:hover {
+      background: linear-gradient(135deg, #f87171, #ef4444);
+      transform: translateY(-1px);
     }
 
     /* FOOTER */
@@ -436,31 +536,33 @@
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
+      h1 { font-size: 1.6rem; }
+      .mode-btn { flex: 1 1 100%; }
+      .mode-requirement-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
 
-      .mode-btn {
-        flex: 1 1 100%;
-      }
+    .mode-requirement-box strong {
+      color: #38bdf8;
+    }
 
-      .action-row {
-        flex-direction: column;
-        align-items: stretch;
-        text-align: center;
-      }
+    .action-row { flex-direction: column; align-items: stretch; text-align: center; }
+      .banner-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -479,19 +581,36 @@
       </a>
       <h1>SZMG Igaz - Hamis Teszt</h1>
       <p class="subtitle">Számítógép Architektúrák és Operációs Rendszerek vizsgafelkészítő</p>
+
+      <div class="keyboard-hint">
+        <span>⚡ Gyorsbillentyűk:</span>
+        <span><span class="kbd-badge">1</span> vagy <span class="kbd-badge">I</span> = IGAZ</span>
+        <span><span class="kbd-badge">2</span> vagy <span class="kbd-badge">H</span> = HAMIS</span>
+        <span><span class="kbd-badge">Szóköz</span> = Következő</span>
+      </div>
     </header>
 
     <!-- CONTROL PANEL -->
     <div class="control-panel">
       <div class="mode-selector">
-        <button class="mode-btn active" data-mode="all" onclick="selectMode('all')">🎯 Teljes Vizsgaanyag</button>
-        <button class="mode-btn" data-mode="1zh" onclick="selectMode('1zh')">⚡ 1. ZH Kérdések</button>
-        <button class="mode-btn" data-mode="2zh" onclick="selectMode('2zh')">💻 2. ZH Kérdések</button>
+        <button class="mode-btn active" data-mode="1zh" onclick="selectMode('1zh')">⚡ 1. ZH Felkészítő (24 kérdés)</button>
+        <button class="mode-btn" data-mode="2zh" onclick="selectMode('2zh')">💻 2. ZH Felkészítő (24 kérdés)</button>
+        <button class="mode-btn" data-mode="vizsga" onclick="selectMode('vizsga')">🎓 Teljes Vizsga (Vegyes 24)</button>
+        <button class="mode-btn" data-mode="only_vizsga" onclick="selectMode('only_vizsga')">🏛️ Csak Vizsgakérdések (24 kérdés)</button>
+      </div>
+
+      <div class="mode-requirement-box" id="mode-requirement-box">
+        🎯 <strong>Követelmény (1. ZH):</strong> Sikeres teljesítés <strong>50%-tól</strong> (min. 12 / 24 helyes válasz).
+      </div>
+
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="topic-search" class="search-input" placeholder="Keresés témára (pl. RAID, HAMR, DDR, NTFS, LMC, LCD, Nyomtató)..." oninput="handleSearch()">
       </div>
 
       <div class="action-row">
         <div class="stats-counter">
-          Kérdések: <span id="stat-answered">0</span> / 24 &nbsp;|&nbsp;
+          Kérdések: <span id="stat-answered">0</span> / <span id="stat-total">24</span> &nbsp;|&nbsp;
           Helyes: <span id="stat-correct" style="color: #34d399;">0</span> &nbsp;|&nbsp;
           Pontosság: <span id="stat-accuracy">0%</span>
         </div>
@@ -512,19 +631,20 @@
       <div class="score-title">Teszt kitöltve!</div>
       <div class="score-pct" id="final-pct">0%</div>
       <div class="score-grade" id="final-grade">Értékelés: -</div>
-      <button class="btn-restart" style="padding: 10px 24px; font-size: 0.95rem;" onclick="initQuiz()">🔄 Új 24 kérdéses
-        teszt indítása</button>
+      <div class="banner-actions">
+        <button id="btn-retry-failed" class="btn-retry-mistakes" style="display:none;" onclick="retryMistakes()">🔄 Elrontott kérdések újratesztelése</button>
+        <button class="btn-restart" style="padding: 10px 22px; font-size: 0.95rem;" onclick="initQuiz()">🎲 Új 24 kérdéses teszt indítása</button>
+      </div>
     </div>
-
 
   </div>
 
   <script>
-    // COMPLETE CURATED QUESTION BANK (1. ZH & 2. ZH)
+    // COMPLETE CURATED QUESTION BANK (1. ZH & 2. ZH + SZAR AUTHENTIC EXAMS)
     const QUESTION_BANK = [
       // --- 1. ZH: Hardware, Number Systems, Hazards, Memory, CPU, Peripherals ---
       { id: 4, q: "Az RC a sorelőtöltődési időt jelenti.", a: false, cat: "1zh", note: "Az RP (Row Precharge) a sorelőtöltési idő, nem az RC." },
-      { id: 6, q: "A CISC architektúrát nagy utasításszám jellemzi.", a: true, cat: "1zh", note: "CISC = Complex Instruction Set Computer, kiterjedt és változó utasításkészlettel." },
+      { id: 6, isExam: true, q: "A CISC architektúrát nagy utasításszám jellemzi.", a: true, cat: "1zh", note: "CISC = Complex Instruction Set Computer, kiterjedt és változó utasításkészlettel." },
       { id: 7, q: "A 4 bites többletes kód ábrázolásánál nincs negatív nulla.", a: true, cat: "1zh", note: "A többletes ábrázolásban a 0 egyértelműen reprezentált, nincs külön -0." },
       { id: 11, q: "Informatikai szempontból a 'random' a 'sequence' ellentéte.", a: true, cat: "1zh", note: "Tetszőleges (random) elérés vs. szekvenciális (soros) elérés." },
       { id: 12, q: "Az LCD kijelző működése a fény polarizációján alapul.", a: true, cat: "1zh", note: "A folyadékkristályok a fény polarizációs síkját forgatják el feszültség hatására." },
@@ -541,13 +661,13 @@
       { id: 32, q: "A 16-os számrendszerben 3 helyiértéken 4096 érték ábrázolható.", a: true, cat: "1zh", note: "16^3 = 4096 (0-tól 4095-ig)." },
       { id: 37, q: "A mátrix nyomtató legelőnyösebb tulajdonsága a több példány egyidejű nyomtatása.", a: true, cat: "1zh", note: "A mechanikus ütőfejes elv miatt indigós papírral több példány nyomtatható egyszerre." },
       { id: 40, q: "A RISC architektúra esetén az utasításkódok mérete változó.", a: false, cat: "1zh", note: "A RISC architektúrában az utasítások fix méretűek a futószalagos végrehajtás miatt." },
-      { id: 41, q: "A MAR az írni vagy olvasni kívánt memória címét tartalmazza.", a: true, cat: "1zh", note: "MAR = Memory Address Register (Címregiszter)." },
+      { id: 41, isExam: true, q: "A MAR az írni vagy olvasni kívánt memória címét tartalmazza.", a: true, cat: "1zh", note: "MAR = Memory Address Register (Címregiszter)." },
       { id: 44, q: "Az LCD egy elemi cellája két egymásra merőleges polárszűrőt tartalmaz.", a: true, cat: "1zh", note: "A két 90°-ban elforgatott polarizátor biztosítja a fény zárását/áteresztését." },
-      { id: 47, q: "A szabályzás zárt hatásláncú folyamat.", a: true, cat: "1zh", note: "A szabályzás visszacsatolást tartalmaz (zárt lánc), ellentétben a nyílt vezérléssel." },
+      { id: 47, isExam: true, q: "A szabályzás zárt hatásláncú folyamat.", a: true, cat: "1zh", note: "A szabályzás visszacsatolást tartalmaz (zárt lánc), ellentétben a nyílt vezérléssel." },
       { id: 48, q: "A NAND technológia bájtonkénti elérésű.", a: false, cat: "1zh", note: "A NAND technológia laponként (page) írható/olvasható és blokkonként törölhető." },
       { id: 49, q: "A PCM technológia része a 3D XPoint technológiának.", a: true, cat: "1zh", note: "A fázisváltó memória (Phase-Change Memory) adja a 3D XPoint alapját." },
       { id: 50, q: "A Bubble Jet technológia a tintát közvetetten melegíti.", a: false, cat: "1zh", note: "Közvetlenül melegíti apró fűtőelemekkel gőzbuborékot képezve." },
-      { id: 53, q: "A deklaratív programozás két fő iránya a logikai és a funkcionális programozás.", a: true, cat: "1zh", note: "Deklaratív paradigmák: funkcionális (pl. Haskell) és logikai (pl. Prolog)." },
+      { id: 53, isExam: true, q: "A deklaratív programozás két fő iránya a logikai és a funkcionális programozás.", a: true, cat: "1zh", note: "Deklaratív paradigmák: funkcionális (pl. Haskell) és logikai (pl. Prolog)." },
       { id: 54, q: "A CISC architektúra esetén egy utasítás fetch fázisa párhuzamosan tud az előtte lévő utasítás execution fázisával végrehajtódni.", a: false, cat: "1zh", note: "Ez a szigorúan futószalagos (pipelined) RISC architektúrák sajátossága." },
       { id: 56, q: "Matematikai logikában az A + 0 = 0.", a: false, cat: "1zh", note: "Boole-algebrában az A + 0 = A." },
       { id: 62, q: "A 4 bites egyes komplemens ábrázolásnál van negatív nulla.", a: true, cat: "1zh", note: "Egyes komplemensben 0000 (+0) és 1111 (-0) is létezik." },
@@ -559,11 +679,11 @@
       { id: 78, q: "A ferritgyűrűs tár olvasás művelete összetettebb az írás műveletnél.", a: true, cat: "1zh", note: "Az olvasás destruktív (törli az adatot), így automatikus visszaírást igényel." },
       { id: 87, q: "A RISC architektúra nagyszámú regisztert tartalmaz.", a: true, cat: "1zh", note: "A műveletek regiszter-regiszter alapúak, minimális memóriahozzáféréssel." },
       { id: 88, q: "A shift balra azonos a számrendszer alapjával történő szorzással.", a: true, cat: "1zh", note: "1 pozícióval balra shiftelés binárisban 2-vel való szorzást jelent." },
-      { id: 94, q: "A RISC architektúrát nagy utasításszám jellemzi.", a: false, cat: "1zh", note: "Kis méretű, egyszerűsített utasításkészlet jellemzi (Reduced Instruction Set)." },
+      { id: 94, isExam: true, q: "A RISC architektúrát nagy utasításszám jellemzi.", a: false, cat: "1zh", note: "Kis méretű, egyszerűsített utasításkészlet jellemzi (Reduced Instruction Set)." },
       { id: 98, q: "A PIEZO a CANON technológiája.", a: false, cat: "1zh", note: "A piezoelektromos nyomtatófej-technológia az Epson sajátja." },
       { id: 99, q: "Létezik olyan DDR2-es RAM, ami gyorsabb mint egy DDR3-as RAM.", a: true, cat: "1zh", note: "Az alacsonyabb CAS késleltetés (latency) miatt extrém esetben a válaszidő jobb lehet." },
       { id: 101, q: "Egy CPU-ba épített GPU területarányosan minimális részt foglal el.", a: false, cat: "1zh", note: "A modern processzorok lapkaterületének akár 40-50%-át is a beépített GPU adja." },
-      { id: 103, q: "Az IPS panel elemi cellájának működtetéséhez feszültséget kell kapcsolni a cella egyik oldalára.", a: true, cat: "1zh", note: "In-Plane Switching: a folyadékkristályok a síkkal párhuzamosan fordulnak el." },
+      { id: 103, isExam: true, q: "Az IPS panel elemi cellájának működtetéséhez feszültséget kell kapcsolni a cella egyik oldalára.", a: true, cat: "1zh", note: "In-Plane Switching: a folyadékkristályok a síkkal párhuzamosan fordulnak el." },
       { id: 107, q: "A CMOS egyik előnye a feszültségfüggetlenség.", a: true, cat: "1zh", note: "Széles tápfeszültség-tartományban működőképes alacsony statikus disszipáció mellett." },
       { id: 113, q: "A FET feszültségvezérelt eszköz.", a: true, cat: "1zh", note: "A térvezérlésű tranzisztor kapuján nincs egyenáram, a csatornát feszültség nyitja." },
       { id: 115, q: "A DRAM frissítést igényel.", a: true, cat: "1zh", note: "A kondenzátorok szivárgása miatt periodikus frissítésre (refresh) van szükség." },
@@ -594,12 +714,12 @@
       { id: 220, q: "Az eredeti Turing-gép 1-es számrendszert használt.", a: true, cat: "1zh", note: "Unáris (egyes) vonalkód-jellegű reprezentációt használt a szalagmezőkön." },
       { id: 228, q: "Az 'AND' igazságtáblája több 1-est tartalmaz, mint az 'XOR'.", a: false, cat: "1zh", note: "Két bemenet esetén az AND 1 db egyest (1,1-nél), az XOR 2 db egyest tartalmaz." },
       { id: 246, q: "A shift jobbra azonos a számrendszer alapjával történő osztással.", a: true, cat: "1zh", note: "Binárisban 1 bittel jobbra tolás a 2-vel való egészosztásnak felel meg." },
-      { id: 256, q: "A ZINK technológia nem igényel nyomtatófestéket.", a: true, cat: "1zh", note: "Zero Ink: a papírba ágyazott színezőkristályok hő hatására színeződnek el." },
-      { id: 257, q: "Az assembly utasítások számokból állnak.", a: false, cat: "1zh", note: "Mnemonikokból (szöveges kódokból: MOV, ADD) állnak, nem közvetlen számokból." },
-      { id: 260, q: "Az SLC cellánként egy bájt tárolására képes.", a: false, cat: "1zh", note: "Single-Level Cell: pontosan 1 bit tárolására képes cellánként." },
-      { id: 265, q: "A plazma kijelző háttérvilágítást igényel.", a: false, cat: "1zh", note: "Önállóan fényt kibocsátó gázkisüléses képpontokkal működik." },
+      { id: 256, isExam: true, q: "A ZINK technológia nem igényel nyomtatófestéket.", a: true, cat: "1zh", note: "Zero Ink: a papírba ágyazott színezőkristályok hő hatására színeződnek el." },
+      { id: 257, isExam: true, q: "Az assembly utasítások számokból állnak.", a: false, cat: "1zh", note: "Mnemonikokból (szöveges kódokból: MOV, ADD) állnak, nem közvetlen számokból." },
+      { id: 260, isExam: true, q: "Az SLC cellánként egy bájt tárolására képes.", a: false, cat: "1zh", note: "Single-Level Cell: pontosan 1 bit tárolására képes cellánként." },
+      { id: 265, isExam: true, q: "A plazma kijelző háttérvilágítást igényel.", a: false, cat: "1zh", note: "Önállóan fényt kibocsátó gázkisüléses képpontokkal működik." },
       { id: 269, q: "A Latency a fej mozgásából fakadó késedelem.", a: false, cat: "1zh", note: "A fejmozgás a Seek time; a Latency a lemez forgásából eredő késleltetés." },
-      { id: 278, q: "Gépi kódú utasítások számokból állnak.", a: true, cat: "1zh", note: "A processzor által végrehajtott bináris opkódok számértékek." },
+      { id: 278, isExam: true, q: "Gépi kódú utasítások számokból állnak.", a: true, cat: "1zh", note: "A processzor által végrehajtott bináris opkódok számértékek." },
       { id: 313, q: "Az LMC modell NEM képes a memóriából az adatokat közvetlenül a kimeneti kosárba juttatni.", a: true, cat: "1zh", note: "Először be kell tölteni a számológépbe (akkumulátorba), onnan mehet a kimenetre." },
       { id: 327, q: "A funkcionális hazárd akkor következik be, amikor több bemeneti változó egyszerre változik meg.", a: true, cat: "1zh", note: "Kombinációs hálózatok több bemenetének egyidejű váltásakor fellépő bizonytalanság." },
       { id: 328, q: "A funkcionális hazárd kivédésének biztos módja a szinkronizáció.", a: true, cat: "1zh", note: "Órajellel kapuzott regiszterekkel az átmeneti hibás állapot kiszűrhető." },
@@ -608,24 +728,39 @@
       { id: 332, q: "A lényeges hazárd az aszinkron sorrendi hálózatokban jelentkezik.", a: true, cat: "1zh", note: "A gerjesztési és visszacsatolási pályák eltérő késleltetései okozzák." },
       { id: 362, q: "1001 0011 (kettesben) = 147 (tízesben).", a: true, cat: "1zh", note: "128 + 16 + 2 + 1 = 147." },
 
+      // --- 1. ZH Gép és Periféria Továbbkérdések ---
+      { id: 501, q: "A HP Inkjet technológia közvetlenül melegíti a tintát a fúvókákban.", a: true, cat: "1zh", note: "A HP Inkjet közvetlen hőtágulással löki ki a tintát, míg a Canon BubbleJet gőzbuborékkal dolgozik." },
+      { id: 502, q: "A Canon BubbleJet technológia a tintát közvetlenül, fűtőszállal melegíti.", a: false, cat: "1zh", note: "A Canon BubbleJet gőzbuborékot képez, így csak közvetett úton melegíti a tintát." },
+      { id: 503, q: "Az Epson Piezo technológia hőmentes, mechanikai alakváltozással működik.", a: true, cat: "1zh", note: "A piezokristály feszültség hatására alakváltozást szenved, így löki ki a tintacseppet hő nélkül." },
+      { id: 504, q: "A lézeres nyomtatókban forgó poligonális tükör ('ninja csillag') tereli a fényt az OPC fényhengerre.", a: true, cat: "1zh", note: "A szkenneres lézernyomtató forgó sokszögtükör segítségével rajzolja meg a sorokat az OPC fényhengeren." },
+      { id: 505, q: "A 3LCD projektorok forgó színkereket alkalmaznak a színek előállításához.", a: false, cat: "1zh", note: "A DLP projektorok alkalmaznak forgó színkereket; a 3LCD három különálló LCD panellel egyidejűleg vetíti ki a színeket." },
+      { id: 506, q: "A DLP projektorok mikrotükrökből álló DMD chip segítségével állítják elő a képet.", a: true, cat: "1zh", note: "DMD (Digital Micromirror Device): több százezer billenő mikrotükör állítja elő a szürkeárnyalatos képet, amit a színkerék színez." },
+      { id: 507, q: "A klasszikus CRT (katódsugárcsöves) kijelzőknél a dinamikus fókusz mechanikus úton valósul meg.", a: false, cat: "1zh", note: "A CRT kijelzőknél a fókuszálás tisztán elektronikus úton, elektromágneses mezőkkel történik." },
+      { id: 508, q: "A Blu-Ray lemezeknél a lézerfény rövidebb utat tesz meg az anyagban, mint a hagyományos DVD-nél.", a: true, cat: "1zh", note: "A vékonyabb fedőréteg (0.1 mm) miatt rövidebb az út, így minimális a fénytörés és fényszórás." },
+      { id: 509, q: "Egy DDR4-3000 PC4-24000 memória valós belső órajele 1500 MHz.", a: true, cat: "1zh", note: "DDR memóriáknál a valós belső órajel fele az adatátviteli frekvenciának (3000 / 2 = 1500 MHz)." },
+      { id: 510, q: "Egy DDR3-2133 PC3-17000 memória elméleti sávszélessége 17000 MB/s.", a: true, cat: "1zh", note: "A PC3-17000 moduljelölés közvetlenül a megközelítő maximális adatátviteli sávszélességet adja meg MB/s-ban." },
+      { id: 511, q: "BCD összeadásnál, ha egy tetrád összege meghaladja a 9-et, 6-ot (0110) kell hozzáadni korrekcióként.", a: true, cat: "1zh", note: "Mivel a BCD csak a 0-9 értékeket használja tetrádonként, a 16-os és 10-es alap különbségét (+6) kell hozzáadni." },
+      { id: 512, q: "A HAMR technológia esetén lézeres melegítést használnak a mágneses bit átírásához.", a: true, cat: "1zh", note: "Heat-Assisted Magnetic Recording: apró lézer dióda melegíti fel a médiát a Curie-hőmérséklet közelébe az írás pillanatában." },
+      { id: 513, q: "A Little Man Computer (LMC) modellben a '901' utasításkód az adat beolvasását (INP) jelenti.", a: true, cat: "1zh", note: "901 = INP (In Basket -> Akkumulátor), a 902 pedig az OUT (Akkumulátor -> Out Basket)." },
+
       // --- 2. ZH: Operating Systems, Processes, Scheduling, Memory Management, File Systems, RAID ---
       { id: 1, q: "Az NT ütemezője a kernel módban, egy darab ütemező modulban található.", a: false, cat: "2zh", note: "Az NT ütemező kódja szétszórva található a kernel kódjában." },
       { id: 2, q: "A tároló méretét megnövelve a FAT mérete nem arányosan növekszik.", a: false, cat: "2zh", note: "A klaszterek számának növekedésével a FAT tábla arányosan nő." },
       { id: 3, q: "Az exokernel gyakorlatilag rendszer rutinkönyvtárat jelent.", a: true, cat: "2zh", note: "Minimális absztrakció, az OS funkciókat nagyrészt felhasználói libOS-ek adják." },
-      { id: 5, q: "A monitor programszerkezetben két feltételváltozó és két művelet van.", a: false, cat: "2zh", note: "Egy feltételváltozó és 2 művelet (wait, signal) van hozzárendelve." },
-      { id: 8, q: "A RAID0 esetében az írási és olvasási sebesség is növekszik.", a: true, cat: "2zh", note: "Az adatsávok párhuzamos írása/olvasása miatt mindkettő nő." },
-      { id: 9, q: "A biztonsági másolat egy adott állomány dupla tárolása, az eredeti állománnyal egyező tárhelyen.", a: false, cat: "2zh", note: "Valódi biztonsági mentés csak fizikailag elkülönített adathordozón értelmezhető." },
+      { id: 5, isExam: true, q: "A monitor programszerkezetben két feltételváltozó és két művelet van.", a: false, cat: "2zh", note: "Egy feltételváltozó és 2 művelet (wait, signal) van hozzárendelve." },
+      { id: 8, isExam: true, q: "A RAID0 esetében az írási és olvasási sebesség is növekszik.", a: true, cat: "2zh", note: "Az adatsávok párhuzamos írása/olvasása miatt mindkettő nő." },
+      { id: 9, isExam: true, q: "A biztonsági másolat egy adott állomány dupla tárolása, az eredeti állománnyal egyező tárhelyen.", a: false, cat: "2zh", note: "Valódi biztonsági mentés csak fizikailag elkülönített adathordozón értelmezhető." },
       { id: 10, q: "A NAND technológia csak laponként címezhető.", a: true, cat: "2zh", note: "A lap (page) a minimális olvasási és írási egység a NAND flash memóriában." },
-      { id: 13, q: "Egy folyamathoz több IOCB is tartozhat.", a: false, cat: "2zh", note: "Az I/O Control Block kezelése eszköz-/műveletfüggő, a vizsgában HAMIS tétel." },
+      { id: 13, isExam: true, q: "Egy folyamathoz több IOCB is tartozhat.", a: false, cat: "2zh", note: "Az I/O Control Block kezelése eszköz-/műveletfüggő, a vizsgában HAMIS tétel." },
       { id: 19, q: "Rezidens tárolás esetén az attribútum értéke nem közvetlenül az attribútum header után van tárolva.", a: false, cat: "2zh", note: "Rezidens NTFS attribútum esetén az adat közvetlenül a fejléc után található." },
-      { id: 20, q: "A független folyamatok jellemzően aszinkron működésűek.", a: true, cat: "2zh", note: "Egymástól függetlenül, időzítési kényszer és szinkronizáció nélkül haladnak." },
+      { id: 20, isExam: true, q: "A független folyamatok jellemzően aszinkron működésűek.", a: true, cat: "2zh", note: "Egymástól függetlenül, időzítési kényszer és szinkronizáció nélkül haladnak." },
       { id: 21, q: "Az átlátszóság azt jelenti, hogy egy szolgáltatás igénybevétele független a fizikai helytől és hardvertől.", a: true, cat: "2zh", note: "Elosztott rendszerek alapfogalma (transparency)." },
       { id: 22, q: "A PAE 32 címbit helyett 48 címbitet használ.", a: false, cat: "2zh", note: "A PAE (Physical Address Extension) 36 címbitet használ x86 rendszereken." },
       { id: 23, q: "A Windows NT, ha lehetősége van rá, szálütemezést használ.", a: false, cat: "2zh", note: "Az NT kizárólag szálakat ütemez (a folyamat passzív erőforrás-tároló)." },
-      { id: 24, q: "Az operációs rendszer közvetlenül kommunikál a hardverrel.", a: false, cat: "2zh", note: "A HAL (Hardware Abstraction Layer) és illesztőprogramok közvetítésével történik." },
+      { id: 24, isExam: true, q: "Az operációs rendszer közvetlenül kommunikál a hardverrel.", a: false, cat: "2zh", note: "A HAL (Hardware Abstraction Layer) és illesztőprogramok közvetítésével történik." },
       { id: 27, q: "Az operációs rendszer szintjén egy Windows NT szálat az ETHREAD blokk reprezentál.", a: true, cat: "2zh", note: "ETHREAD (Executive Thread) és KTHREAD reprezentálja a szálat." },
       { id: 31, q: "A UNIX kernel módban preemptív ütemezést használ, de user módban nem preemptív.", a: false, cat: "2zh", note: "Pont fordítva: a klasszikus UNIX user módban preemptív, kernelben nem preemptív." },
-      { id: 33, q: "Az egyidejűség esetén a folyamatoknak be kell várniuk egymást.", a: true, cat: "2zh", note: "Kritikus erőforrás elérésekor zárolás és várakozás lép fel." },
+      { id: 33, isExam: true, q: "Az egyidejűség esetén a folyamatoknak be kell várniuk egymást.", a: true, cat: "2zh", note: "Kritikus erőforrás elérésekor zárolás és várakozás lép fel." },
       { id: 34, q: "Az NT virtuális tárkezelése lapszervezést használ.", a: true, cat: "2zh", note: "4 KB-os lapméretű virtuális lapszervezést valósít meg." },
       { id: 35, q: "A RAID0 összefűzést jelent.", a: true, cat: "2zh", note: "Csíkozást / összefűzést valósít meg paritás nélkül." },
       { id: 36, q: "Az NTFS írási folyamata hat lépésből áll.", a: false, cat: "2zh", note: "Az NTFS tranzakciós írási folyamata pontosan 7 lépésből áll." },
@@ -648,7 +783,7 @@
       { id: 69, q: "RAID1 esetében növekszik az írási sebesség.", a: false, cat: "2zh", note: "Az írás sebessége nem nő (mindkét lemezre írni kell), csak az olvasás gyorsul." },
       { id: 70, q: "Az FCFS nem preemptív algoritmus.", a: true, cat: "2zh", note: "A futó folyamat nem szakítható meg külsőleg, amíg véget nem ér vagy nem blokkol." },
       { id: 74, q: "A Commit az NT memóriafoglalásának első lépése.", a: false, cat: "2zh", note: "Az első lépés a Reserve (címfoglalás), utána jön a Commit (tényleges rendelés)." },
-      { id: 79, q: "A verem egy szálra jellemző elem.", a: true, cat: "2zh", note: "Minden szálnak saját hívási verme (stack) és regiszterkészlete van." },
+      { id: 79, isExam: true, q: "A verem egy szálra jellemző elem.", a: true, cat: "2zh", note: "Minden szálnak saját hívási verme (stack) és regiszterkészlete van." },
       { id: 81, q: "A kritikus szakaszba a belépést csak szoftveres úton engedélyezhetjük.", a: false, cat: "2zh", note: "Hardveres támogatással (pl. TestAndSet utasítás) is megvalósítható." },
       { id: 83, q: "Az NT ütemezője a kernel kódjában szétszórva található.", a: true, cat: "2zh", note: "Nincs külön önálló ütemező modul; a kernelkód különböző pontjai hívják meg." },
       { id: 84, q: "A PCB processzor szintű adatokat is tartalmaz.", a: true, cat: "2zh", note: "Tartalmazza a CPU regiszterek állapotát környezetváltáshoz." },
@@ -665,9 +800,9 @@
       { id: 108, q: "NT alapú rendszerekben minden szál alacsony prioritással kezdi futását.", a: false, cat: "2zh", note: "Minden szál normál prioritással indul." },
       { id: 110, q: "Hálózati operációs rendszerek átlátszóságot biztosítanak.", a: false, cat: "2zh", note: "A hálózati OS-ek nem biztosítanak teljes transzparenciát, csak az elosztott rendszerek." },
       { id: 118, q: "A spooling technológia nem igényel háttértárat.", a: false, cat: "2zh", note: "A spooling a lassú perifériák helyett gyors háttértárra pufferel." },
-      { id: 119, q: "A RAID10 lassabb, mint a RAID01.", a: false, cat: "2zh", note: "Sebességük gyakorlatilag azonos, de a RAID10 hibatűrése jobb." },
+      { id: 119, isExam: true, q: "A RAID10 lassabb, mint a RAID01.", a: false, cat: "2zh", note: "Sebességük gyakorlatilag azonos, de a RAID10 hibatűrése jobb." },
       { id: 120, q: "A virtuális memória méretének az operatív tár mérete szab határt.", a: true, cat: "2zh", note: "A vizsgatételek szerint a címezhetőség és swap méret mellett határoló tényező." },
-      { id: 121, q: "Az archiválás esetén jellemzően cél a keresés biztosítása.", a: true, cat: "2zh", note: "Hosszú távú megőrzés indexelt visszakereshetőséggel." },
+      { id: 121, isExam: true, q: "Az archiválás esetén jellemzően cél a keresés biztosítása.", a: true, cat: "2zh", note: "Hosszú távú megőrzés indexelt visszakereshetőséggel." },
       { id: 123, q: "Az UFS jellemzője a naplózás.", a: false, cat: "2zh", note: "Klasszikus UFS-nél superblock és magic number van, naplózást később kapott." },
       { id: 145, q: "A RAID5 maximum egy lemez meghibásodását képes javítani.", a: true, cat: "2zh", note: "Egyetlen paritásblokk van szétosztva, így legfeljebb 1 lemez eshet ki." },
       { id: 149, q: "RAID6 esetében a minimális lemezszám 3 db.", a: false, cat: "2zh", note: "Legalább 4 lemez szükséges a dupla paritás elosztásához." },
@@ -693,69 +828,190 @@
       { id: 298, q: "Az NTFS írási folyamata 7 lépésből áll.", a: true, cat: "2zh", note: "1. Lock, 2. Log, 3. Update cache, 4. Flush log, 5. Write disk, 6. Commit, 7. Unlock." },
       { id: 326, q: "A HDD és a RAM cache memóriája között a FirmWare viszi át az adatokat.", a: true, cat: "2zh", note: "A meghajtó beépített vezérlője és firmware-e transzparensen kezeli a puffert." },
       { id: 340, q: "Az éheztetés folyamat szintű probléma.", a: true, cat: "2zh", note: "Egy prioritást vesztett folyamat soha nem jut processzoridőhöz." },
-      { id: 342, q: "A holtpont operációs rendszer szintű probléma.", a: true, cat: "2zh", note: "Erőforrások körkörös várakozása miatt az egész alrendszer megakadhat." }
+      { id: 342, q: "A holtpont operációs rendszer szintű probléma.", a: true, cat: "2zh", note: "Erőforrások körkörös várakozása miatt az egész alrendszer megakadhat." },
+
+      // --- 2. ZH Rendszer Továbbkérdések ---
+      { id: 516, q: "A RAID5 tömb minimálisan 3 darab merevlemezt igényel.", a: true, cat: "2zh", note: "A körbeforgó paritás elosztásához legalább 3 fizikai lemez szükséges." },
+      { id: 517, q: "A RAID5 esetében csak az olvasás gyorsul, az írás lassabb mint egyetlen diszknél.", a: false, cat: "2zh", note: "Az adatsávok elosztása miatt mind az írás, mind az olvasás párhuzamosan végezhető és gyorsul." },
+      { id: 518, q: "A RAID5 két merevlemez egyidejű kiesése esetén is adatvesztés nélkül működik.", a: false, cat: "2zh", note: "A RAID5 pontosan 1 lemez meghibásodását képes elviselni. 2 lemezhez RAID6 kell." },
+      { id: 519, q: "A RAID1 működéséhez legalább 2 darab merevlemez szükséges.", a: true, cat: "2zh", note: "A RAID1 tükrözés, így minimum 2 lemez kell hozzá." },
+      { id: 520, q: "A RAID0 tömb képes elviselni 1 merevlemez meghibásodását.", a: false, cat: "2zh", note: "A RAID0 csíkozás nulla hibatűréssel; bármelyik lemez kiesése a teljes adatvesztést jelenti." },
+      { id: 521, q: "Az NTFS Master File Table (MFT) minden bejegyzése pontosan 1024 bájt méretű fájlrekord.", a: true, cat: "2zh", note: "Az MFT rekordok mérete fixen 1 KB (1024 bájt), itt tárolódnak a rezidens attribútumok." },
+      { id: 522, q: "A klasszikus holtpont (Deadlock) kialakulásához mind a 4 Coffman-feltételnek egyszerre kell teljesülnie.", a: true, cat: "2zh", note: "Kölcsönös kizárás, Fogva tartás és várakozás, Nincs megszakítás (no preemption), Körkörös várakozás." },
+      { id: 523, q: "Az éheztetés (Starvation) és a holtpont (Deadlock) egyaránt operációs rendszer szintű probléma.", a: false, cat: "2zh", note: "Az éheztetés folyamatszintű, míg a holtpont operációs rendszer szintű probléma." },
+      { id: 524, q: "A UNIX UFS fájlrendszer a fájlok leírására és mutatóira Inode-okat használ.", a: true, cat: "2zh", note: "Az Inode tárolja a fájl metaadatait, valamint a közvetlen és indirekt blokkmutatókat." },
+
+      // --- SPECIFIKUS VIZSGAKÉRDÉSEK & BEUGRÓK ---
+      { id: 601, isExam: true, q: "Az Antivalencia (XOR) művelet kimenete akkor 1, ha a bemenetei megegyeznek.", a: false, cat: "vizsga", note: "Az antivalencia (kizáró vagy) akkor 1, ha a bemenetei különböznek (0 és 1)." },
+      { id: 602, isExam: true, q: "A 3D XPoint technológia keresztpontos szerkezetet használ tranzisztorok nélkül.", a: true, cat: "vizsga", note: "Nemfelejtő fázisváltó (PCM) rétegek rácspontjain tárolja a biteket, tranzisztormentes architektúrával." },
+      { id: 603, isExam: true, q: "Az IGZO paneltechnológia az amorf szilícium tranzisztorokhoz képest jóval nagyobb elektronmobilitást biztosít.", a: true, cat: "vizsga", note: "Indium Gallium Cink Oxid: kisebb tranzisztorméret, 40x gyorsabb elektronáramlás, kisebb fogyasztás." },
+      { id: 604, isExam: true, q: "A RAID10 hibatűrőbb megoldás, mint a RAID01.", a: true, cat: "vizsga", note: "RAID10 esetén különböző tükörpárokból több diszk is kieshet, míg RAID01-nél az egyik sáv hibája az egész alrendszert leállítja." },
+      { id: 605, isExam: true, q: "A vezérlés és a szabályozás közötti alapvető különbség, hogy a vezérlés zárt hatásláncú.", a: false, cat: "vizsga", note: "A vezérlés nyílt hatásláncú (nincs visszacsatolás), a szabályozás a zárt hatásláncú (visszacsatolással mér)." },
+      { id: 606, isExam: true, q: "A három LCD paneltechnológia közül az IPS rendelkezik a legszélesebb betekintési szöggel.", a: true, cat: "vizsga", note: "Az IPS (In-Plane Switching) folyadékkristályai a képsíkkal párhuzamosan fordulnak el, minimalizálva a színtorzulást oldalról." },
+      // --- DEDIKÁLT VIZSGAKÉRDÉSEK (SZMG_Igaz-Hamis-1-2_zhvizsga.xlsx alapján) ---
+      { id: 610, q: "A LED lézer technológia esetén a lapméret nem eredményez jelentős készülékméret növekedést.", a: false, cat: "vizsga", isExam: true, note: "A LED-sor a papír teljes szélességét átéri, így nagyobb lapméret (pl. A3) esetén a készülék mérete drasztikusan nő." },
+      { id: 611, q: "A SRAM frissítést igényel.", a: false, cat: "vizsga", isExam: true, note: "A DRAM igényel frissítést a kondenzátorok szivárgása miatt; az SRAM bistabil és nem igényel frissítést." },
+      { id: 612, q: "A Bubble Jet technológia közvetlenül a festéket melegíti.", a: false, cat: "vizsga", isExam: true, note: "A Canon Bubble Jet apró fűtőelemekkel gőzbuborékot képez, és a buborék tágulása löki ki a tintát (közvetett melegítés)." },
+      { id: 613, q: "A napóra értelmezhető digitális óraként.", a: true, cat: "vizsga", isExam: true, note: "A vizsgatételek szerint a napóra beosztása diszkrét vonalakból áll, így digitális/mintavételezett jellegűnek tekinthető." },
+      { id: 614, q: "A deklaratív programozás esetén a programozó állításokat közöl.", a: true, cat: "vizsga", isExam: true, note: "A deklaratív nyelvben a célállapotot írjuk le szabályokkal és állításokkal (a 'mit', nem a 'hogyan')." },
+      { id: 615, q: "A mentésnél jellemzően nem cél a keresés biztosítása.", a: true, cat: "vizsga", isExam: true, note: "A biztonsági mentés célja a gyors katasztrófa utáni helyreállítás, míg az indexelt keresés az archiválás célja." },
+      { id: 616, q: "A mentésnél jellemzően cél a keresés biztosítása.", a: false, cat: "vizsga", isExam: true, note: "A keresés biztosítása az archiválásnál cél; a mentés (backup) célja az adatbiztonság és a helyreállítás." },
+      { id: 617, q: "Az informatikában használt 'busz' szó görög eredetű.", a: false, cat: "vizsga", isExam: true, note: "Latin eredetű (az 'omnibus' szóból származik, jelentése: mindenkinek, mindenkiért)." },
+      { id: 618, q: "A két logikai kapuból álló RS tároló 1 bit tárolására alkalmas.", a: true, cat: "vizsga", isExam: true, note: "A kétkapus bistabil RS tároló 1 bit bináris adat tárolására képes." },
+      { id: 619, q: "A blokkok szektorokból állnak.", a: true, cat: "vizsga", isExam: true, note: "A merevlemezen a logikai blokkok egy vagy több fizikai szektorból (vagy ZBR zónából) épülnek fel." },
+      { id: 620, q: "A kettes számrendszerben 8 helyiértéken 255 számjegy ábrázolható.", a: false, cat: "vizsga", isExam: true, note: "8 helyiértéken kettes számrendszerben 2^8 = 256 különböző érték (0-tól 255-ig) ábrázolható." },
+      { id: 621, q: "A MAR az írni és olvasni kívánt memória tartalmát tartalmazza.", a: false, cat: "vizsga", isExam: true, note: "A MAR (Memory Address Register) a memóriacímet tartalmazza; a tartalmat az MDR / MBR tárolja." },
+      { id: 622, q: "Az északi híd a gyors perifériákkal tart kapcsolatot.", a: true, cat: "vizsga", isExam: true, note: "A Northbridge a CPU, a RAM és a nagysebességű grafikus vezérlő (PCIe/AGP) közötti kapcsolatért felel." },
+      { id: 623, q: "Az IGZO kisebb fogyasztású, mint az LCD.", a: true, cat: "vizsga", isExam: true, note: "Az IGZO tranzisztorok szivárgása minimális, statikus képnél szüneteltethető a frissítés, így lényegesen energiatakarékosabb." },
+      { id: 624, q: "A ferromágneses anyagok jellemzője a hiszterézis.", a: true, cat: "vizsga", isExam: true, note: "A ferromágneses anyagok mágnesezettsége késik a külső térhez képest (hiszterézis-görbe), ez teszi lehetővé a mágneses adattárolást." }
     ];
 
     // STATE VARIABLES
-    let currentMode = 'all';
+    let currentMode = '1zh'; // '1zh', '2zh', 'vizsga', 'only_vizsga', 'mistakes'
+    let previousMode = '1zh';
     let activeQuestions = [];
     let userAnswers = {}; // { qIndex: { chosen: bool, isCorrect: bool } }
+    let lastFailedQuestions = [];
 
     function selectMode(mode) {
+      if (currentMode !== 'mistakes') {
+        previousMode = currentMode;
+      }
       currentMode = mode;
+      document.getElementById('topic-search').value = '';
       document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.mode === mode);
       });
+      updateRequirementBox();
       initQuiz();
     }
 
-    function initQuiz() {
+    function updateRequirementBox() {
+      const box = document.getElementById('mode-requirement-box');
+      if (!box) return;
+      if (currentMode === '1zh' || currentMode === '2zh') {
+        const zhName = currentMode === '1zh' ? '1. ZH' : '2. ZH';
+        box.innerHTML = `🎯 <strong>Követelmény (${zhName}):</strong> Sikeres teljesítés <strong>50%-tól</strong> (legalább 12 / 24 helyes válasz).`;
+      } else if (currentMode === 'vizsga' || currentMode === 'only_vizsga') {
+        box.innerHTML = `🎯 <strong>Vizsga Pontozás (24 kérdés):</strong> ≤16p: Elégtelen (1) &nbsp;|&nbsp; 17–18p: Elégséges (2) &nbsp;|&nbsp; 19–20p: Közepes (3) &nbsp;|&nbsp; 21–22p: Jó (4) &nbsp;|&nbsp; 23–24p: Jeles (5)`;
+      } else if (currentMode === 'mistakes') {
+        box.innerHTML = `🔄 <strong>Hibajavítás:</strong> Az előző körben elrontott kérdések újratesztelése.`;
+      }
+    }
+
+    function initQuiz(customPool = null) {
       userAnswers = {};
       document.getElementById('score-banner').classList.remove('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // 1. Filter pool based on selected category
-      let pool = QUESTION_BANK;
-      if (currentMode === '1zh') {
-        pool = QUESTION_BANK.filter(q => q.cat === '1zh');
-      } else if (currentMode === '2zh') {
-        pool = QUESTION_BANK.filter(q => q.cat === '2zh');
+      if (customPool) {
+        activeQuestions = [...customPool];
+      } else {
+        const searchTerm = document.getElementById('topic-search').value.trim().toLowerCase();
+        let pool = [];
+
+        if (currentMode === '1zh') {
+          pool = QUESTION_BANK.filter(q => q.cat === '1zh');
+          if (searchTerm) {
+            pool = pool.filter(q => q.q.toLowerCase().includes(searchTerm) || (q.note && q.note.toLowerCase().includes(searchTerm)));
+          }
+          activeQuestions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 24);
+        } else if (currentMode === '2zh') {
+          pool = QUESTION_BANK.filter(q => q.cat === '2zh');
+          if (searchTerm) {
+            pool = pool.filter(q => q.q.toLowerCase().includes(searchTerm) || (q.note && q.note.toLowerCase().includes(searchTerm)));
+          }
+          activeQuestions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 24);
+        } else if (currentMode === 'only_vizsga') {
+          // Kimondottan csak a dedikált vizsgatételek az Excel táblázatból és a beugrókból
+          pool = QUESTION_BANK.filter(q => q.cat === 'vizsga' || q.isExam);
+          if (searchTerm) {
+            pool = pool.filter(q => q.q.toLowerCase().includes(searchTerm) || (q.note && q.note.toLowerCase().includes(searchTerm)));
+          }
+          activeQuestions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 24);
+        } else if (currentMode === 'vizsga') {
+          // Teljes vizsga: Garantáltan tartalmazza az Excel-beli dedikált vizsgakérdéseket, valamint az 1. ZH és 2. ZH anyagát is!
+          if (searchTerm) {
+            pool = QUESTION_BANK.filter(q => q.q.toLowerCase().includes(searchTerm) || (q.note && q.note.toLowerCase().includes(searchTerm)));
+            activeQuestions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 24);
+          } else {
+            const vizsgaPool = QUESTION_BANK.filter(q => q.cat === 'vizsga' || q.isExam).sort(() => 0.5 - Math.random());
+            const zh1Pool = QUESTION_BANK.filter(q => q.cat === '1zh' && !q.isExam).sort(() => 0.5 - Math.random());
+            const zh2Pool = QUESTION_BANK.filter(q => q.cat === '2zh' && !q.isExam).sort(() => 0.5 - Math.random());
+
+            const pickedVizsga = vizsgaPool.slice(0, 8);
+            const picked1 = zh1Pool.slice(0, 8);
+            const picked2 = zh2Pool.slice(0, 8);
+
+            // Összefésülés és még egyszer összekeverés, hogy vegyes sorrendben kövessék egymást
+            activeQuestions = [...pickedVizsga, ...picked1, ...picked2].sort(() => 0.5 - Math.random());
+          }
+        }
       }
 
-      // 2. Shuffle and pick exactly 24
-      const shuffled = [...pool].sort(() => 0.5 - Math.random());
-      activeQuestions = shuffled.slice(0, 24);
-
-      // 3. Render questions
       renderQuiz();
       updateStats();
+    }
+
+    function handleSearch() {
+      initQuiz();
+    }
+
+    function retryMistakes() {
+      if (!lastFailedQuestions || lastFailedQuestions.length === 0) return;
+      previousMode = currentMode;
+      currentMode = 'mistakes';
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+      updateRequirementBox();
+      initQuiz(lastFailedQuestions);
     }
 
     function renderQuiz() {
       const container = document.getElementById('questions-container');
       container.innerHTML = '';
 
+      if (activeQuestions.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: var(--text-muted); background: var(--card-bg); border-radius: 16px; border: 1px solid var(--card-border);">
+            <h3>Nem található kérdés a megadott keresési feltételre!</h3>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Próbálj más kifejezést beírni, vagy töröld a keresőt.</p>
+          </div>
+        `;
+        return;
+      }
+
       activeQuestions.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'question-card';
         card.id = `q-card-${index}`;
 
-        const isZH1 = item.cat === '1zh';
-        const tagClass = isZH1 ? 'tag-1zh' : 'tag-2zh';
-        const tagText = isZH1 ? '1. ZH Anyag' : '2. ZH Anyag';
+        let tagClass = 'tag-1zh';
+        let tagText = '1. ZH Anyag';
+        if (item.cat === '2zh') {
+          tagClass = 'tag-2zh';
+          tagText = '2. ZH Anyag';
+        }
+        if (item.cat === 'vizsga' || (item.isExam && (currentMode === 'vizsga' || currentMode === 'only_vizsga'))) {
+          tagClass = 'tag-vizsga';
+          tagText = '🎓 Vizsga Kérdés';
+        } else if (item.isExam) {
+          tagText += ' • 🎓 Vizsga';
+        }
 
         card.innerHTML = `
           <div class="card-meta">
-            <span class="q-number">#${index + 1} / 24</span>
+            <span class="q-number">#${index + 1} / ${activeQuestions.length}</span>
             <span class="q-category-tag ${tagClass}">${tagText}</span>
           </div>
           <div class="q-text">${escapeHtml(item.q)}</div>
           <div class="options-grid">
             <button class="opt-btn" id="btn-${index}-true" onclick="answerQuestion(${index}, true)">
-              ✓ IGAZ
+              <span>✓ IGAZ</span>
+              <span class="key-hint">1 / I</span>
             </button>
             <button class="opt-btn" id="btn-${index}-false" onclick="answerQuestion(${index}, false)">
-              ✕ HAMIS
+              <span>✕ HAMIS</span>
+              <span class="key-hint">2 / H</span>
             </button>
           </div>
           <div class="explanation-box" id="exp-${index}">
@@ -768,11 +1024,11 @@
     }
 
     function answerQuestion(index, choice) {
-      if (userAnswers[index]) return; // already answered
+      if (userAnswers[index]) return;
 
       const question = activeQuestions[index];
       const isCorrect = (choice === question.a);
-      userAnswers[index] = { chosen: choice, isCorrect: isCorrect };
+      userAnswers[index] = { chosen: choice, isCorrect: isCorrect, item: question };
 
       const card = document.getElementById(`q-card-${index}`);
       const btnTrue = document.getElementById(`btn-${index}-true`);
@@ -794,61 +1050,130 @@
         rightBtn.classList.add('should-have-been');
       }
 
-      // Show note/correction box
       expBox.classList.add('show');
-
       updateStats();
 
-      // Check if all 24 questions completed
-      if (Object.keys(userAnswers).length === 24) {
+      if (Object.keys(userAnswers).length === activeQuestions.length) {
         showFinalScore();
       }
     }
 
     function updateStats() {
       const answeredCount = Object.keys(userAnswers).length;
+      const totalCount = activeQuestions.length;
       const correctCount = Object.values(userAnswers).filter(a => a.isCorrect).length;
       const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
 
       document.getElementById('stat-answered').innerText = answeredCount;
+      document.getElementById('stat-total').innerText = totalCount;
       document.getElementById('stat-correct').innerText = correctCount;
       document.getElementById('stat-accuracy').innerText = `${accuracy}%`;
 
-      const progressPct = (answeredCount / 24) * 100;
+      const progressPct = totalCount > 0 ? (answeredCount / totalCount) * 100 : 0;
       document.getElementById('progress-bar').style.width = `${progressPct}%`;
     }
 
     function showFinalScore() {
+      const total = activeQuestions.length;
       const correctCount = Object.values(userAnswers).filter(a => a.isCorrect).length;
-      const pct = Math.round((correctCount / 24) * 100);
+      const pct = Math.round((correctCount / total) * 100);
+
+      lastFailedQuestions = Object.values(userAnswers)
+        .filter(a => !a.isCorrect)
+        .map(a => a.item);
 
       const banner = document.getElementById('score-banner');
-      document.getElementById('final-pct').innerText = `${correctCount} / 24 (${pct}%)`;
+      document.getElementById('final-pct').innerText = `${correctCount} / ${total} pont (${pct}%)`;
 
       let gradeBadge = '';
-      if (pct >= 85) {
-        gradeBadge = '<span class="grade-num grade-5">Jeles (5) 🎉</span> - Kiváló felkészültség!';
-      } else if (pct >= 75) {
-        gradeBadge = '<span class="grade-num grade-4">Jó (4) 👍</span> - Szép munka, stabil tudás!';
-      } else if (pct >= 65) {
-        gradeBadge = '<span class="grade-num grade-3">Közepes (3) 🙂</span> - Biztos alapok, még csiszolható.';
-      } else if (pct >= 50) {
-        gradeBadge = '<span class="grade-num grade-2">Elégséges (2) ⚠️</span> - Éppen megvan, érdemes ismételni.';
+      const isVizsgaMode = (currentMode === 'vizsga' || currentMode === 'only_vizsga' || (currentMode === 'mistakes' && (previousMode === 'vizsga' || previousMode === 'only_vizsga')));
+
+      if (isVizsgaMode) {
+        // VIZSGA PONTOZÁSA A FELHASZNÁLÓI SZABÁLY SZERINT (24 pontból):
+        // 16 pontig: elégtelen (1)
+        // 17 és 18 pont között: elégséges (2)
+        // 19 és 20 pont között: közepes (3)
+        // 21 és 22 pont között: jó (4)
+        // 23 és 24 pont között: jeles (5)
+        const pts = (total === 24) ? correctCount : Math.round((correctCount / total) * 24);
+
+        if (pts <= 16) {
+          gradeBadge = `<span class="grade-num grade-1">Elégtelen (1) ❌</span> — Sikertelen vizsga (${pts}/24 pont. 16 pontig elégtelen, min. 17 pont szükséges!)`;
+        } else if (pts <= 18) {
+          gradeBadge = `<span class="grade-num grade-2">Elégséges (2) ⚠️</span> — Sikeres vizsga! (${pts}/24 pont, 17–18 pont)`;
+        } else if (pts <= 20) {
+          gradeBadge = `<span class="grade-num grade-3">Közepes (3) 🙂</span> — Sikeres vizsga! (${pts}/24 pont, 19–20 pont)`;
+        } else if (pts <= 22) {
+          gradeBadge = `<span class="grade-num grade-4">Jó (4) 👍</span> — Sikeres vizsga! (${pts}/24 pont, 21–22 pont)`;
+        } else {
+          gradeBadge = `<span class="grade-num grade-5">Jeles (5) 🎉</span> — Kiváló vizsga! (${pts}/24 pont, 23–24 pont)`;
+        }
       } else {
-        gradeBadge = '<span class="grade-num grade-1">Elégtelen (1) ❌</span> - Szükséges még gyakorolni a kérdéseket.';
+        // ZH PONTOZÁSA: Sikeres ZH 50%-tól van!
+        if (pct < 50) {
+          gradeBadge = `<span class="grade-num grade-1">Elégtelen (1) ❌</span> — Sikertelen ZH (${correctCount}/${total} pont, ${pct}% — minimum 50% szükséges!)`;
+        } else if (pct < 63) {
+          gradeBadge = `<span class="grade-num grade-2">Elégséges (2) ⚠️</span> — Sikeres ZH! (${correctCount}/${total} pont, ${pct}%)`;
+        } else if (pct < 75) {
+          gradeBadge = `<span class="grade-num grade-3">Közepes (3) 🙂</span> — Sikeres ZH! (${correctCount}/${total} pont, ${pct}%)`;
+        } else if (pct < 88) {
+          gradeBadge = `<span class="grade-num grade-4">Jó (4) 👍</span> — Sikeres ZH! (${correctCount}/${total} pont, ${pct}%)`;
+        } else {
+          gradeBadge = `<span class="grade-num grade-5">Jeles (5) 🎉</span> — Kiváló ZH! (${correctCount}/${total} pont, ${pct}%)`;
+        }
       }
 
       document.getElementById('final-grade').innerHTML = `Értékelés: ${gradeBadge}`;
-      banner.classList.add('show');
 
+      const retryBtn = document.getElementById('btn-retry-failed');
+      if (lastFailedQuestions.length > 0) {
+        retryBtn.innerText = `🔄 Elrontott kérdések újratesztelése (${lastFailedQuestions.length} db)`;
+        retryBtn.style.display = 'inline-block';
+      } else {
+        retryBtn.style.display = 'none';
+      }
+
+      banner.classList.add('show');
       banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // KEYBOARD SHORTCUTS
+    window.addEventListener('keydown', (e) => {
+      if (document.activeElement && document.activeElement.tagName === 'INPUT') {
+        return;
+      }
+
+      const nextUnansweredIdx = activeQuestions.findIndex((_, idx) => !userAnswers[idx]);
+      if (nextUnansweredIdx === -1) return;
+
+      const key = e.key.toLowerCase();
+      if (key === '1' || key === 'i') {
+        e.preventDefault();
+        answerQuestion(nextUnansweredIdx, true);
+        scrollToNext(nextUnansweredIdx + 1);
+      } else if (key === '2' || key === 'h') {
+        e.preventDefault();
+        answerQuestion(nextUnansweredIdx, false);
+        scrollToNext(nextUnansweredIdx + 1);
+      } else if (e.code === 'Space') {
+        e.preventDefault();
+        scrollToNext(nextUnansweredIdx);
+      }
+    });
+
+    function scrollToNext(targetIdx) {
+      if (targetIdx < activeQuestions.length) {
+        const nextCard = document.getElementById(`q-card-${targetIdx}`);
+        if (nextCard) {
+          nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
     }
 
     function escapeHtml(str) {
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    // Initialize default quiz on load
     window.addEventListener('DOMContentLoaded', () => {
       initQuiz();
     });
